@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+<form method="POST" th:action="@{/orders}" th:object="${order}">
+    <h1>Order your pizza!</h1>
+
+    <img th:src="@{/images/pizza.png}" height="200" width="200"/>
+    <a th:href="@{/design}" id="another">Design another pizza</a><br/>
+
+    <div th:if="${#fields.hasErrors()}">
+        <span class="validationError">
+        Please correct the problems below and resubmit.
+        </span>
+    </div>
+
+    <h3>Deliver my pizza masterpieces to...</h3>
+    <label for="name">Name: </label>
+    <input type="text" th:field="*{name}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}">Name Error</span>
+    <br/>
+
+    <label for="pNumber">Phone Number: </label>
+    <input type="text" th:field="*{pNumber}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('pNumber')}"
+          th:errors="*{pNumber}">pNumber Error</span>
+    <br/>
+
+    <label for="city">City: </label>
+    <input type="text" th:field="*{city}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('city')}"
+          th:errors="*{city}">City Error</span>
+    <br/>
+
+    <label for="address">Address: </label>
+    <input type="text" th:field="*{address}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('address')}"
+          th:errors="*{address}">Address Error</span>
+    <br/>
+
+    <h3>Here's how I'll pay...</h3>
+    <label for="ccNumber">Credit Card #: </label>
+    <input type="text" th:field="*{ccNumber}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('ccNumber')}"
+          th:errors="*{ccNumber}">CC Num Error</span>
+    <br/>
+
+    <input type="submit" value="Submit order"/>
+</form>
+
+</body>
+</html>
